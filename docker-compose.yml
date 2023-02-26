@@ -38,5 +38,18 @@ services:
       - grocy.env
     restart: unless-stopped
 
+  barcodeBuddy:
+    image: "f0rc3/barcodebuddy-docker:latest"
+    ports:
+      - '8082:80'
+      - '9443:443'
+    volumes:
+      - bbconfig:/config
+    env_file:
+      - barcodeBuddy.env
+    depends_on:
+      - frontend
+
 volumes:
   app-db:
+  bbconfig:
